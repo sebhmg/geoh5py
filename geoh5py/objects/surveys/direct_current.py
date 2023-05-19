@@ -42,12 +42,12 @@ class BaseElectrode(Curve, ABC):
         """
         Reference data entity mapping cells to a unique current dipole.
         """
-        if getattr(self, "_ab_cell_id", None) is None:
+        if self._ab_cell_id is None:
             child = self.get_data("A-B Cell ID")
             if any(child) and isinstance(child[0], ReferencedData):
                 self.ab_cell_id = child[0]
 
-        if getattr(self, "_ab_cell_id", None) is not None:
+        if self._ab_cell_id is not None:
             return self._ab_cell_id
 
         return None
@@ -226,7 +226,7 @@ class BaseElectrode(Curve, ABC):
         """
         Metadata attached to the entity.
         """
-        if getattr(self, "_metadata", None) is None:
+        if self._metadata is None:
             metadata = self.workspace.fetch_metadata(self.uid)
             self._metadata = metadata
         return self._metadata
@@ -272,7 +272,7 @@ class PotentialElectrode(BaseElectrode):
         """
         The associated current electrode object (sources).
         """
-        if getattr(self, "_current_electrodes", None) is None:
+        if self._current_electrodes is None:
             if self.metadata is not None and "Current Electrodes" in self.metadata:
                 transmitter = self.metadata["Current Electrodes"]
                 transmitter_entity = self.workspace.get_entity(transmitter)[0]
@@ -353,7 +353,7 @@ class CurrentElectrode(BaseElectrode):
         """
         The associated potential_electrodes (receivers)
         """
-        if getattr(self, "_potential_electrodes", None) is None:
+        if self._potential_electrodes is None:
             if self.metadata is not None and "Potential Electrodes" in self.metadata:
                 potential = self.metadata["Potential Electrodes"]
                 potential_entity = self.workspace.get_entity(potential)[0]

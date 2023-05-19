@@ -70,7 +70,7 @@ class BlockModel(GridObject):
             ]
         """
         if (
-            getattr(self, "_centroids", None) is None
+            self._centroids is None
             and self.u_cells is not None
             and self.v_cells is not None
             and self.z_cells is not None
@@ -187,7 +187,7 @@ class BlockModel(GridObject):
         :obj:`numpy.array` of :obj:`float`:
         Nodal offsets along the u-axis relative to the origin.
         """
-        if (getattr(self, "_u_cell_delimiters", None) is None) and self.on_file:
+        if (self._u_cell_delimiters is None) and self.on_file:
             self._u_cell_delimiters = self.workspace.fetch_array_attribute(
                 self, "u_cell_delimiters"
             )
@@ -219,7 +219,7 @@ class BlockModel(GridObject):
         :obj:`numpy.array` of :obj:`float`:
         Nodal offsets along the v-axis relative to the origin.
         """
-        if (getattr(self, "_v_cell_delimiters", None) is None) and self.on_file:
+        if (self._v_cell_delimiters is None) and self.on_file:
             self._v_cell_delimiters = self.workspace.fetch_array_attribute(
                 self, "v_cell_delimiters"
             )
@@ -251,7 +251,7 @@ class BlockModel(GridObject):
         :obj:`numpy.array` of :obj:`float`:
         Nodal offsets along the z-axis relative to the origin (positive up).
         """
-        if (getattr(self, "_z_cell_delimiters", None) is None) and self.on_file:
+        if (self._z_cell_delimiters is None) and self.on_file:
             self._z_cell_delimiters = self.workspace.fetch_array_attribute(
                 self, "z_cell_delimiters"
             )

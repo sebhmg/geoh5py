@@ -207,6 +207,4 @@ def test_clip_groups(tmp_path):
                 len(new_workspace.objects) == 1
             ), "Error removing curve without nodes."
             assert len(new_workspace.groups) == 2, "Error removing empty group."
-            assert (
-                getattr(new_workspace.groups[0].children[0], "_vertices", None) is None
-            )
+            assert new_workspace.groups[0].children[0]._vertices is None

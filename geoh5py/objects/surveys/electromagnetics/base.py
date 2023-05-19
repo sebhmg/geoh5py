@@ -386,7 +386,7 @@ class BaseEMSurvey(ObjectBase, ABC):
     @property
     def metadata(self):
         """Metadata attached to the entity."""
-        if getattr(self, "_metadata", None) is None:
+        if self._metadata is None:
             metadata = self.workspace.fetch_metadata(self.uid)
 
             if metadata is None:
@@ -438,7 +438,7 @@ class BaseEMSurvey(ObjectBase, ABC):
         """
         The associated TEM receivers.
         """
-        if getattr(self, "_receivers", None) is None:
+        if self._receivers is None:
             if self.metadata is not None and "Receivers" in self.metadata["EM Dataset"]:
                 receiver = self.metadata["EM Dataset"]["Receivers"]
                 receiver_entity = self.workspace.get_entity(receiver)[0]
@@ -471,7 +471,7 @@ class BaseEMSurvey(ObjectBase, ABC):
         """
         The associated TEM transmitters (sources).
         """
-        if getattr(self, "_transmitters", None) is None:
+        if self._transmitters is None:
             if (
                 self.metadata is not None
                 and "Transmitters" in self.metadata["EM Dataset"]

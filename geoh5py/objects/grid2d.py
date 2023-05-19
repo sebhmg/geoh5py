@@ -116,7 +116,7 @@ class Grid2D(GridObject):
             ]
         """
         if (
-            getattr(self, "_centroids", None) is None
+            self._centroids is None
             and self.cell_center_u is not None
             and self.cell_center_v is not None
             and self.n_cells is not None

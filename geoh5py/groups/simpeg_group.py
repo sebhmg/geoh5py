@@ -48,7 +48,7 @@ class SimPEGGroup(Group):
         """
         Metadata attached to the entity.
         """
-        if getattr(self, "_options", None) is None:
+        if self._options is None:
             self._options = self.workspace.fetch_metadata(self.uid, argument="options")
 
         if self._options is None:

@@ -41,6 +41,7 @@ class CellObject(Points, ABC):
 
     def __init__(self, object_type: ObjectType, name="Object", **kwargs):
         self._cells: np.ndarray | None = None
+        self._vertices: np.ndarray | None = None
 
         super().__init__(object_type, name=name, **kwargs)
 

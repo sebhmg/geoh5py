@@ -45,7 +45,7 @@ class NumericData(Data, ABC):
         """
         :return: values: An array of float values
         """
-        if getattr(self, "_values", None) is None:
+        if self._values is None:
             values = self.workspace.fetch_values(self)
 
             if isinstance(values, (np.ndarray, type(None))):

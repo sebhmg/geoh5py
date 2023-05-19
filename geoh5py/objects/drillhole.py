@@ -77,7 +77,7 @@ class Drillhole(Points):
         :obj:`numpy.ndarray` of :obj:`int`, shape (\*, 2):
         Array of indices defining segments connecting vertices.
         """
-        if getattr(self, "_cells", None) is None:
+        if self._cells is None:
             if self.on_file:
                 self._cells = self.workspace.fetch_array_attribute(self)
 
@@ -176,7 +176,7 @@ class Drillhole(Points):
         """
         Lookup array of the well path in x, y, z coordinates.
         """
-        if getattr(self, "_locations", None) is None and self.collar is not None:
+        if self._locations is None and self.collar is not None:
             surveys = np.vstack([self.surveys[0, :], self.surveys])
             surveys[0, 0] = 0.0
             lengths = surveys[1:, 0] - surveys[:-1, 0]
@@ -228,7 +228,7 @@ class Drillhole(Points):
         """
         Coordinates of the surveys
         """
-        if (getattr(self, "_surveys", None) is None) and self.on_file:
+        if (self._surveys is None) and self.on_file:
             self._surveys = self.workspace.fetch_array_attribute(self, "surveys")
 
         if isinstance(self._surveys, np.ndarray):
@@ -296,7 +296,7 @@ class Drillhole(Points):
         """
         :obj:`numpy.array`: Drillhole trace depth from top to bottom
         """
-        if getattr(self, "_trace_depth", None) is None and self.trace is not None:
+        if self._trace_depth is None and self.trace is not None:
             trace = self.trace
             self._trace_depth = trace[0, 2] - trace[:, 2]
 

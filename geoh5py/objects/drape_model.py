@@ -59,7 +59,7 @@ class DrapeModel(GridObject):
                 [x_N, y_N, z_N]
             ]
         """
-        if getattr(self, "_centroids", None) is None:
+        if self._centroids is None:
             if self.layers is None:
                 raise AttributeError(
                     "Attribute 'layers' must be defined before accessing 'centroids'."

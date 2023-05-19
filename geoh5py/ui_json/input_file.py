@@ -145,7 +145,7 @@ class InputFile:
         """
         Name of ui.json file.
         """
-        if getattr(self, "_name", None) is None and self.ui_json is not None:
+        if self._name is None and self.ui_json is not None:
             self.name = self.ui_json["title"]
 
         return self._name
@@ -162,7 +162,7 @@ class InputFile:
         """
         Directory for the input/output ui.json file.
         """
-        if getattr(self, "_path", None) is None and self.geoh5 is not None:
+        if self._path is None and self.geoh5 is not None:
             self.path = str(Path(self.geoh5.h5file).parent)
 
         return self._path
@@ -352,7 +352,7 @@ class InputFile:
 
     @property
     def validators(self):
-        if getattr(self, "_validators", None) is None:
+        if self._validators is None:
             self._validators = InputValidation(
                 ui_json=self.ui_json,
                 validations=self.validations,

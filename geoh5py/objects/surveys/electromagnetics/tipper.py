@@ -60,7 +60,7 @@ class TipperSurvey(FEMSurvey, AirborneEMSurvey):
         if isinstance(self, TipperBaseStations):
             return self
 
-        if getattr(self, "_base_stations", None) is None:
+        if self._base_stations is None:
             if (
                 self.metadata is not None
                 and "Base stations" in self.metadata["EM Dataset"]

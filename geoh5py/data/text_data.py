@@ -37,7 +37,7 @@ class TextData(Data):
         """
         :obj:`str` Text value.
         """
-        if (getattr(self, "_values", None) is None) and self.on_file:
+        if (self._values is None) and self.on_file:
             values = self.workspace.fetch_values(self)
             if isinstance(values, (np.ndarray, str, type(None))):
                 self._values = values
@@ -81,7 +81,7 @@ class CommentsData(Data):
         """
         :obj:`list` List of comments
         """
-        if (getattr(self, "_values", None) is None) and self.on_file:
+        if (self._values is None) and self.on_file:
             comment_str = self.workspace.fetch_values(self)
 
             if isinstance(comment_str, str):
@@ -120,7 +120,7 @@ class MultiTextData(Data):
         """
         :obj:`str` Text value.
         """
-        if (getattr(self, "_values", None) is None) and self.on_file:
+        if (self._values is None) and self.on_file:
             values = self.workspace.fetch_values(self)
             if isinstance(values, (np.ndarray, str, type(None))):
                 self._values = values

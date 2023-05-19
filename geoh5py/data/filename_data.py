@@ -41,7 +41,7 @@ class FilenameData(Data):
         """
         :obj:`str` Text value.
         """
-        if getattr(self, "_file_name", None) is None:
+        if self._file_name is None:
             file_name = self.workspace.fetch_values(self)
 
             if isinstance(file_name, (str, type(None))):
@@ -80,11 +80,7 @@ class FilenameData(Data):
         """
         Binary :obj:`str` value representation of a file.
         """
-        if (
-            self.file_name is not None
-            and self.on_file
-            and getattr(self, "_values", None) is None
-        ):
+        if self.file_name is not None and self.on_file and self._values is None:
             self._values = self.workspace.fetch_file_object(self.uid, self.file_name)
 
         return self._values

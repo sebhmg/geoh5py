@@ -129,7 +129,7 @@ class Octree(GridObject):
                 [x_N, y_N, z_N]
             ]
         """
-        if getattr(self, "_centroids", None) is None:
+        if self._centroids is None:
             assert self.octree_cells is not None, "octree_cells must be set"
             assert self.u_cell_size is not None, "u_cell_size must be set"
             assert self.v_cell_size is not None, "v_cell_size must be set"
@@ -191,7 +191,7 @@ class Octree(GridObject):
                 [i_N, j_N, k_N, size_N]
             ]
         """
-        if getattr(self, "_octree_cells", None) is None:
+        if self._octree_cells is None:
             if self.on_file:
                 octree_cells = self.workspace.fetch_array_attribute(
                     self, "octree_cells"

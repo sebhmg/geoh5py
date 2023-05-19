@@ -318,7 +318,7 @@ class Entity(ABC):
         """
         Metadata attached to the entity.
         """
-        if getattr(self, "_metadata", None) is None:
+        if self._metadata is None:
             self._metadata = self.workspace.fetch_metadata(self.uid)
 
         return self._metadata

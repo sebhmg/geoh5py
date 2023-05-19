@@ -79,7 +79,7 @@ class Concatenator(Group):  # pylint: disable=too-many-public-methods
     @property
     def attributes_keys(self) -> list | None:
         """List of uuids present in the concatenated attributes."""
-        if getattr(self, "_attributes_keys", None) is None:
+        if self._attributes_keys is None:
             attributes_keys = []
             if self.concatenated_attributes is not None:
                 attributes_keys = [
@@ -173,7 +173,7 @@ class Concatenator(Group):  # pylint: disable=too-many-public-methods
     @property
     def concatenated_object_ids(self) -> list[bytes] | None:
         """Dictionary of concatenated objects and data concatenated_object_ids."""
-        if getattr(self, "_concatenated_object_ids", None) is None:
+        if self._concatenated_object_ids is None:
             concatenated_object_ids = self.workspace.fetch_array_attribute(
                 self, "concatenated_object_ids"
             )

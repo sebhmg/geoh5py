@@ -64,7 +64,7 @@ class GeoImage(ObjectBase):
         Array of indices defining segments connecting vertices. Defined based on
         :obj:`~geoh5py.objects.curve.Curve.parts` if set by the user.
         """
-        if getattr(self, "_cells", None) is None:
+        if self._cells is None:
             if self.on_file:
                 self._cells = self.workspace.fetch_array_attribute(self)
             else:
@@ -409,7 +409,7 @@ class GeoImage(ObjectBase):
         :obj:`~geoh5py.objects.object_base.ObjectBase.vertices`:
         Defines the four corners of the geo_image
         """
-        if (getattr(self, "_vertices", None) is None) and self.on_file:
+        if (self._vertices is None) and self.on_file:
             self._vertices = self.workspace.fetch_array_attribute(self, "vertices")
 
         if self._vertices is None and self.image is not None:

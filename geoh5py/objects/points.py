@@ -35,7 +35,6 @@ class Points(ObjectBase):
 
     def __init__(self, object_type: ObjectType, name="Points", **kwargs):
         self._vertices: np.ndarray | None = None
-
         super().__init__(object_type, name=name, **kwargs)
 
         object_type.workspace._register_object(self)

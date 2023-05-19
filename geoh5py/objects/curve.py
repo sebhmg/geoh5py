@@ -55,7 +55,7 @@ class Curve(CellObject):
         Array of indices defining segments connecting vertices. Defined based on
         :obj:`~geoh5py.objects.curve.Curve.parts` if set by the user.
         """
-        if getattr(self, "_cells", None) is None:
+        if self._cells is None:
             if self._parts is not None:
                 cells = []
                 for part_id in self.unique_parts:
@@ -99,7 +99,7 @@ class Curve(CellObject):
 
     @property
     def current_line_id(self) -> uuid.UUID | None:
-        if getattr(self, "_current_line_id", None) is None:
+        if self._current_line_id is None:
             self._current_line_id = uuid.uuid4()
 
         return self._current_line_id
@@ -134,11 +134,7 @@ class Curve(CellObject):
         property. The definition of the :obj:`~geoh5py.objects.curve.Curve.cells`
         property get modified by the setting of parts.
         """
-        if (
-            getattr(self, "_parts", None) is None
-            and self.cells is not None
-            and self.vertices is not None
-        ):
+        if self._parts is None and self.cells is not None and self.vertices is not None:
             cells = self.cells
             parts = np.zeros(self.vertices.shape[0], dtype="int")
             count = 0
