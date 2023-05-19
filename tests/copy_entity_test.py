@@ -66,7 +66,7 @@ def test_copy_entity(tmp_path: Path):
         for obj, kwargs in objects.items():
             entity = obj.create(workspace, **kwargs)
 
-            if getattr(entity, "vertices", None) is not None:
+            if entity.vertices is not None:
                 values = np.random.randn(entity.n_vertices)
             else:
                 values = np.random.randn(entity.n_cells)

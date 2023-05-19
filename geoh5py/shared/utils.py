@@ -315,7 +315,7 @@ def uuid2entity(value: UUID, workspace: Workspace) -> Entity | Any:
 
         # Search for property groups
         for obj in workspace.objects:
-            if getattr(obj, "property_groups", None) is not None:
+            if obj.property_groups is not None:
                 prop_group = [
                     prop_group
                     for prop_group in getattr(obj, "property_groups")

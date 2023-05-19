@@ -105,7 +105,8 @@ class CellObjectConversion(BaseConversion):
         :return: A Points object.
         """
         # verify if the entity contains centroids
-        if getattr(input_entity, "centroids", None) is None:
+        centroids = getattr(input_entity, "centroids", None)
+        if centroids is None:
             raise TypeError(
                 "Input entity for `GridObject` conversion must have centroids."
             )
@@ -114,7 +115,7 @@ class CellObjectConversion(BaseConversion):
 
         # get the properties
         kwargs = cls.verify_kwargs(input_entity, **kwargs)
-        kwargs["vertices"] = getattr(input_entity, "centroids", None)
+        kwargs["vertices"] = centroids
 
         # create the point object
         output = objects.Points.create(workspace, **kwargs)

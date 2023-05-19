@@ -86,7 +86,7 @@ class GroupType(EntityType):
         :return: A new instance of GroupType.
         """
         uid = uuid.uuid4()
-        if getattr(entity_class, "default_type_uid", None) is not None and isinstance(
+        if entity_class.default_type_uid is not None and isinstance(
             entity_class.default_type_uid(), uuid.UUID
         ):
             uid = entity_class.default_type_uid()

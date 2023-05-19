@@ -147,7 +147,7 @@ class AssociationValidator(BaseValidator):
         elif isinstance(valid, Entity):
             children = valid.workspace.fetch_children(valid, recursively=True)
 
-        if uid not in [getattr(child, "uid", None) for child in children]:
+        if uid not in [child.uid for child in children if child is not None]:
             raise AssociationValidationError(name, value, valid)
 
 

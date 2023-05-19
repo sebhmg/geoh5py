@@ -451,7 +451,7 @@ class ObjectBase(Entity):
 
         for child in self.children:
             if (
-                getattr(child, "values", None) is not None
+                child.values is not None
                 and isinstance(child.association, DataAssociationEnum)
                 and child.association.name == association
             ):
@@ -481,12 +481,12 @@ class ObjectBase(Entity):
             return
 
         if (
-            getattr(self, "n_cells", None) is not None
+            self.n_cells is not None
             and attribute_dict["values"].ravel().shape[0] == self.n_cells
         ):
             attribute_dict["association"] = "CELL"
         elif (
-            getattr(self, "n_vertices", None) is not None
+            self.n_vertices is not None
             and attribute_dict["values"].ravel().shape[0] == self.n_vertices
         ):
             attribute_dict["association"] = "VERTEX"

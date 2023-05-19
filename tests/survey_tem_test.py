@@ -123,7 +123,7 @@ def test_create_survey_airborne_tem(tmp_path):
         ), f"Failed in removing '{key}' property from metadata."
 
     assert (
-        getattr(receivers, "relative_to_bearing", None) is None
+        receivers.relative_to_bearing is None
     ), "Default 'relative_to_bearing' should be None."
 
     with pytest.raises(

@@ -167,7 +167,7 @@ class CellObject(Points, ABC):
 
             kwargs.update({"vertices": self.vertices[mask, :]})
 
-        new_cells = getattr(self, "cells", None)
+        new_cells = self.cells
         if mask is not None:
             new_id = np.ones_like(mask, dtype=int)
             new_id[mask] = np.arange(np.sum(mask))

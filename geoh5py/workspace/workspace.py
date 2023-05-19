@@ -674,11 +674,16 @@ class Workspace(AbstractContextManager):
                         recovered_object, recursively=True
                     )
 
-                    if getattr(recovered_object, "property_groups", None) is not None:
-                        family_tree += getattr(recovered_object, "property_groups")
+                    if (
+                        isinstance(recovered_object, ObjectBase)
+                        and recovered_object.property_groups is not None
+                    ):
+                        family_tree += recovered_object.property_groups
 
-        if getattr(entity, "property_groups", None) is not None:
-            family_tree += getattr(entity, "property_groups")
+        if isinstance(entity, ObjectBase):
+            property_groups = entity.property_groups
+            if property_groups is not None:
+                family_tree += property_groups
 
         return family_tree
 

@@ -388,7 +388,7 @@ class CurrentElectrode(BaseElectrode):
         """
         Utility function to set ab_cell_id's based on curve cells.
         """
-        if getattr(self, "cells", None) is None or self.n_cells is None:
+        if self.cells is None or self.n_cells is None:
             raise AttributeError(
                 "Cells must be set before assigning default ab_cell_id"
             )

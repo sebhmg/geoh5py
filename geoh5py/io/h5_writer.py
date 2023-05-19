@@ -386,7 +386,7 @@ class H5Writer:
     def write_color_map(
         cls,
         file: str | h5py.File,
-        entity_type: shared.EntityType,
+        entity_type: DataType,
     ) -> None:
         """
         Add :obj:`~geoh5py.data.color_map.ColorMap` to a
@@ -396,7 +396,7 @@ class H5Writer:
         :param entity_type: Target entity_type with color_map
         """
         with fetch_h5_handle(file, mode="r+") as h5file:
-            color_map = getattr(entity_type, "color_map", None)
+            color_map = entity_type.color_map
             entity_type_handle = H5Writer.fetch_handle(h5file, entity_type)
 
             if entity_type_handle is None:
@@ -432,7 +432,9 @@ class H5Writer:
         :param entity_type: Target entity_type with value_map
         """
         with fetch_h5_handle(file, mode="r+") as h5file:
-            reference_value_map = getattr(entity_type, "value_map", None)
+            reference_value_map = (
+                entity_type.value_map if isinstance(entity_type, DataType) else None
+            )
             names = ["Key", "Value"]
             formats = ["<u4", h5py.special_dtype(vlen=str)]
 
@@ -601,7 +603,7 @@ class H5Writer:
                 elif isinstance(entity, TextData) and not isinstance(values[0], bytes):
                     out_values = [val.encode() for val in values]
 
-                if getattr(entity, "ndv", None) is not None:
+                if entity.ndv is not None:
                     out_values[np.isnan(out_values)] = entity.ndv
 
                 entity_handle.create_dataset(
@@ -747,10 +749,8 @@ class H5Writer:
             )
             H5Writer.write_attributes(h5file, entity_type)
 
-            if hasattr(entity_type, "color_map"):
+            if isinstance(entity_type, DataType):
                 H5Writer.write_color_map(h5file, entity_type)
-
-            if hasattr(entity_type, "value_map"):
                 H5Writer.write_value_map(h5file, entity_type)
 
             entity_type.on_file = True

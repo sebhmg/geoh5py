@@ -92,7 +92,7 @@ class GridObject(ObjectBase, ABC):
             for child in self.children:
                 if (
                     isinstance(mask, np.ndarray)
-                    and isinstance(getattr(child, "values", None), np.ndarray)
+                    and isinstance(child.values, np.ndarray)
                     and child.values.shape == mask.shape
                 ):
                     values = np.ones_like(child.values) * np.nan

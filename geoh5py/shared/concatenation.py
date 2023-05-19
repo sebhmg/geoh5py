@@ -274,7 +274,7 @@ class Concatenator(Group):  # pylint: disable=too-many-public-methods
         """
         Concatenated data values stored as a dictionary.
         """
-        if getattr(self, "_data", None) is None:
+        if self._data is None:
             self._data, self._index = self.fetch_concatenated_data_index()
 
         return self._data
@@ -425,7 +425,7 @@ class Concatenator(Group):  # pylint: disable=too-many-public-methods
         """
         Concatenated index stored as a dictionary.
         """
-        if getattr(self, "_index", None) is None:
+        if self._index is None:
             self._data, self._index = self.fetch_concatenated_data_index()
 
         return self._index
@@ -507,7 +507,10 @@ class Concatenator(Group):  # pylint: disable=too-many-public-methods
         if label == "attributes":
             self.update_concatenated_attributes(entity)
         elif label == "property_groups":
-            if getattr(entity, "property_groups", None) is not None:
+            if (
+                isinstance(entity, ConcatenatedObject)
+                and entity.property_groups is not None
+            ):
                 for prop_group in getattr(entity, "property_groups"):
                     self.add_save_concatenated(prop_group)
                     if (

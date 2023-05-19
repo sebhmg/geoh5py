@@ -682,7 +682,8 @@ class Drillhole(Points):
                 for child in self.children:
                     if (
                         isinstance(child, NumericData)
-                        and getattr(child.association, "name", None) == "VERTEX"
+                        and child.association is not None
+                        and child.association.name == "VERTEX"
                     ):
                         child.values = child.check_vector_length(child.values)[sort_ind]
 

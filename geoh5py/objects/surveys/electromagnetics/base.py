@@ -239,7 +239,7 @@ class BaseEMSurvey(ObjectBase, ABC):
 
         metadata["EM Dataset"][new_entity.type] = new_entity.uid
 
-        if apply_to_complement and (getattr(self, "complement", None) is not None):
+        if apply_to_complement and (self.complement is not None):
             base_object = (
                 self.base_transmitter_type  # pylint: disable=no-member
                 if isinstance(self, self.default_receiver_type)
@@ -752,7 +752,7 @@ class LargeLoopGroundEMSurvey(BaseEMSurvey, Curve):
             )
 
         self._tx_id_property = value
-        self.edit_metadata({"Tx ID property": getattr(value, "uid", None)})
+        self.edit_metadata({"Tx ID property": value.uid if value is not None else None})
 
 
 class AirborneEMSurvey(BaseEMSurvey, Curve):

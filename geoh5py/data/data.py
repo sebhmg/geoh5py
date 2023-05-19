@@ -229,7 +229,7 @@ class Data(Entity):
             return mask_by_extent(self.parent.vertices, extent, inverse=inverse)
 
         if self.association is DataAssociationEnum.CELL:
-            if getattr(self.parent, "centroids", None) is not None:
+            if self.parent.centroids is not None:
                 return mask_by_extent(self.parent.centroids, extent, inverse=inverse)
 
             indices = mask_by_extent(self.parent.vertices, extent, inverse=inverse)
