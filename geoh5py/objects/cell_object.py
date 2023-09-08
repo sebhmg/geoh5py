@@ -74,6 +74,9 @@ class CellObject(Points, ABC):
 
         return vert_mask
 
+
+
+
     def remove_cells(self, indices: list[int] | np.ndarray, clear_cache: bool = False):
         """
         Safely remove cells and corresponding data entries.
@@ -103,6 +106,7 @@ class CellObject(Points, ABC):
         setattr(self, "cells", cells)
 
         self.remove_children_values(indices, "CELL", clear_cache=clear_cache)
+
 
     def remove_vertices(
         self, indices: list[int] | np.ndarray, clear_cache: bool = False
