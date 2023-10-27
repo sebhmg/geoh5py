@@ -59,9 +59,11 @@ Installation
 techniques made available under the python ecosystem. We therefore recommend installing
 `Miniforge <https://github.com/conda-forge/miniforge>`_ to handle the various packages.
 
-Install **geoh5py** from PyPI::
+Install **geoh5py** from PyPI:
 
-    $ pip install geoh5py
+.. code-block:: bash
+
+    pip install geoh5py
 
 Setup for development
 ^^^^^^^^^^^^^^^^^^^^^
@@ -70,17 +72,35 @@ After having cloned the Git repository you will need to set up `Poetry`_.
 
 To install poetry:
 
+.. code-block:: ps1
+
+  (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
+
+The installer creates a poetry wrapper in a well-known, platform-specific directory (``%APPDATA%\Python\Scripts`` on Windows).
+If this directory is not present in your PATH, you can add it in order to invoke Poetry as ``poetry``.
+
+You can test poetry is now found your PATH by running ``poetry --version``.
+
+.. _Poetry: https://python-poetry.org/docs/
+
+
+Specify and install the project dependencies
+--------------------------------------------
+Update `pyproject.toml`_ with the desired packages.
+Dependencies for development and testing should be added to the section ``[tool.poetry.group.dev.dependencies]``.
+
+Then, execute the following command:
+
 .. code-block:: bash
 
-  curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+  poetry install
 
-Then, create and activate the virtual environment simply with:
+
+To activate and work from the virtual environment:
 
 .. code-block:: bash
 
   poetry shell
-
-.. _Poetry: https://poetry.eustace.io/docs/
 
 Configure the pre-commit hooks
 ------------------------------
@@ -96,6 +116,22 @@ All the pre-commit checks run automatically for you, and reformat files when req
 
 .. _pre-commit: https://pre-commit.com/
 
+Running the tests
+-----------------
+Test files are placed under the ``tests`` folder. Inside this folder and sub-folders,
+Python test files are to be named with `_test.py` as a suffix.
+
+
+To execute the tests, run the following command:
+
+.. code-block:: bash
+
+  poetry run pytest
+
+pytest will run with the code coverage options specified in sections
+``[tool.coverage.*]`` of `pyproject.toml`_ (including options for code coverage).
+
+
 IDE
 ---
 `PyCharm`_, by JetBrains, is a very good IDE for developing with Python.
@@ -110,15 +146,7 @@ For Vim lovers, also check out `IdeaVim`_.
 .. _Toml: https://plugins.jetbrains.com/plugin/8195-toml/
 .. _IdeaVim: https://plugins.jetbrains.com/plugin/164-ideavim/
 
-Build the docs
---------------
-
-To build the api docs using autodocs
-
-.. code-block:: bash
-
-  sphinx-apidoc -o source/ ../geoh5py -t docs/templates
-
+.. _pyproject.toml: pyproject.toml
 
 License
 ^^^^^^^

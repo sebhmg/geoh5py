@@ -1,7 +1,7 @@
 Installation
 ============
 
-**geoh5py** is currently written for Python 3.7 or higher, and depends on `NumPy <https://numpy.org/>`_ and
+**geoh5py** is currently written for Python 3.8 or higher, and depends on `NumPy <https://numpy.org/>`_ and
 `h5py <https://www.h5py.org/>`_.
 
 
@@ -16,10 +16,9 @@ Install **geoh5py** from PyPI::
 To install the latest development version of **geoh5py**, you can use ``pip`` with the
 latest GitHub ``development`` branch::
 
-    $ pip install git+https://github.com/MiraGeoscience/geoh5py.git
+    $ pip install https://github.com/MiraGeoscience/geoh5py/archive/development.zip
 
-To work with **geoh5py** source code in development, install from GitHub::
+To work with **geoh5py** source code in development, clone from GitHub and install in editable mode::
 
-    $ git clone --recursive https://github.com/MiraGeoscience/geoh5py.git
-    $ cd geoh5py
-    $ python setup.py install
+    $ git clone https://github.com/MiraGeoscience/geoh5py.git
+    $ pip install -e ./geoh5py
