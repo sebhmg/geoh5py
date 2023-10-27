@@ -57,12 +57,11 @@ Installation
 **geoh5py** is currently written for Python 3.7 or higher, and depends on `NumPy <https://numpy.org/>`_ and
 `h5py <https://www.h5py.org/>`_. Users will likely want to also make use of advanced processing
 techniques made available under the python ecosystem. We therefore recommend installing
-Anaconda to handle the various packages.
+`Miniforge <https://github.com/conda-forge/miniforge>`_ to handle the various packages.
 
 Install **geoh5py** from PyPI::
 
     $ pip install geoh5py
-
 
 Setup for development
 ^^^^^^^^^^^^^^^^^^^^^

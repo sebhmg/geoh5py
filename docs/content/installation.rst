@@ -6,12 +6,8 @@ Installation
 
 
 
-.. note:: Users will likely want to take advantage of other packages available in the Python ecosystem. We therefore recommend using `Anaconda <https://www.anaconda.com/download/>`_ to manage the installation.
-
-	.. figure:: ../images/installation/MinicondaInstaller.png
-	    :align: center
-	    :width: 200
-
+.. note:: Users will likely want to take advantage of other packages available in the Python ecosystem.
+   We therefore recommend using `Miniforge <https://github.com/conda-forge/miniforge>`_ to handle the various packages.
 
 Install **geoh5py** from PyPI::
 
