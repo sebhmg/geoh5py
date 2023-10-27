@@ -51,3 +51,12 @@ along with geoh5py.  If not, see <https://www.gnu.org/licenses/>.
 Copyright
 ^^^^^^^^^
 Copyright (c) 2023 Mira Geoscience Ltd.
+
+
+Citing geoh5py
+^^^^^^^^^^^^^^
+
+If you use **geoh5py** in your research, please cite it as follows:
+
+.. image:: https://zenodo.org/badge/207860560.svg
+   :target: https://zenodo.org/badge/latestdoi/207860560
