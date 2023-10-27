@@ -13,8 +13,7 @@ Installation
 `h5py <https://www.h5py.org/>`_.
 
 .. note:: Users will likely want to take advantage of other packages available in the Python ecosystem.
-    We therefore recommend using `Anaconda <https://www.anaconda.com/download/>`_ to manage the installation.
-
+   We therefore recommend installing `Miniforge <https://github.com/conda-forge/miniforge>`_ to handle the various packages.
 
 Install **geoh5py** from PyPI::
 
