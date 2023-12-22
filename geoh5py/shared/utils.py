@@ -186,7 +186,7 @@ def merge_arrays(
     mapping=None,
     collocation_distance=1e-4,
     return_mapping=False,
-) -> np.ndarray:
+) -> np.ndarray | Tuple[np.ndarray, np.ndarray]:
     """
     Given two numpy.arrays of different length, find the matching values and append both arrays.
 
