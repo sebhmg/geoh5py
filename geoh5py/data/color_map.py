@@ -14,11 +14,13 @@
 #
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with geoh5py.  If not, see <https://www.gnu.org/licenses/>.
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
 import numpy as np
+import numpy.typing as npt
 
 from geoh5py.shared.exceptions import ShapeValidationError
 
@@ -34,7 +36,7 @@ class ColorMap:
     _formats = ["<f8", "u1", "u1", "u1", "u1"]
 
     def __init__(self, **kwargs):
-        self._values = np.empty((0, 5))
+        self._values: npt.NDArray = np.empty((0, 5))
         self._name = "geoh5py_custom.TBL"
         self._parent = None
 
@@ -63,7 +65,7 @@ class ColorMap:
         """
         if self._values is None:
             return self._values
-        return np.vstack([self._values[name] for name in self._names])
+        return np.vstack([self._values[name] for name in self._names])  # type: ignore[call-overload]
 
     @values.setter
     def values(self, values: np.ndarray):
@@ -74,7 +76,7 @@ class ColorMap:
             if values.shape[1] != 5:
                 raise ShapeValidationError("values", values.shape, "(*, 5)")
 
-            self._values = np.core.records.fromarrays(
+            self._values = np.rec.fromarrays(
                 values.T, names=self._names, formats=self._formats
             )
 

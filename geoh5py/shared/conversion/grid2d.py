@@ -21,6 +21,7 @@ from typing import TYPE_CHECKING
 from uuid import UUID
 
 import numpy as np
+import numpy.typing as npt
 from PIL import Image
 
 from ... import objects
@@ -83,7 +84,7 @@ class Grid2DConversion(CellObjectConversion):
 
     @staticmethod
     def data_to_pil_format(
-        input_entity: Grid2D, data: np.ndarray, normalize: bool = True
+        input_entity: Grid2D, data: npt.NDArray, normalize: bool = True
     ) -> np.ndarray:
         """
         Convert a numpy array with a format compatible with :obj:`PIL.Image` object.

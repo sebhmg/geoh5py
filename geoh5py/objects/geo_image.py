@@ -14,6 +14,7 @@
 #
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with geoh5py.  If not, see <https://www.gnu.org/licenses/>.
+
 from __future__ import annotations
 
 import uuid
@@ -24,6 +25,7 @@ from tempfile import TemporaryDirectory
 from typing import TYPE_CHECKING, Any
 
 import numpy as np
+import numpy.typing as npt
 from PIL import Image
 from PIL.TiffImagePlugin import TiffImageFile
 
@@ -57,7 +59,7 @@ class GeoImage(ObjectBase):
 
     def __init__(self, object_type: ObjectType, **kwargs):
         self._vertices: None | np.ndarray = None
-        self._cells = None
+        self._cells: npt.NDArray | None = None
         self._tag: dict[int, Any] | None = None
 
         super().__init__(object_type, **kwargs)
@@ -448,7 +450,7 @@ class GeoImage(ObjectBase):
         return None
 
     @property
-    def origin(self) -> np.array | None:
+    def origin(self) -> np.ndarray | None:
         """
         The origin of the image.
         :return: an array of the origin of the image in x, y, z.
@@ -459,7 +461,7 @@ class GeoImage(ObjectBase):
         return None
 
     @property
-    def rotation(self) -> float | None:
+    def rotation(self) -> float:
         """
         The rotation of the image in degrees, counter-clockwise.
         :return: the rotation angle.
@@ -622,7 +624,7 @@ class GeoImage(ObjectBase):
             raise ValueError("Input 'vertices' must be a numpy array of shape (4, 3)")
 
         xyz = np.asarray(
-            np.core.records.fromarrays(xyz.T, names="x, y, z", formats="<f8, <f8, <f8")
+            np.rec.fromarrays(xyz.T, names="x, y, z", formats="<f8, <f8, <f8")
         )
 
         self._vertices = xyz

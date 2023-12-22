@@ -61,6 +61,9 @@ class CellObject(Points, ABC):
         if self.extent is None or not box_intersect(self.extent, extent):
             return None
 
+        if self.vertices is None:
+            return None
+
         vert_mask = mask_by_extent(self.vertices, extent, inverse=inverse)
 
         # Check for orphan vertices

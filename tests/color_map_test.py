@@ -86,7 +86,7 @@ def test_create_color_map(tmp_path):
     ), "Failed raising error on wrong type color map values."
 
     with pytest.raises(ValueError) as error:
-        data.entity_type.color_map.values = np.core.records.fromarrays(
+        data.entity_type.color_map.values = np.rec.fromarrays(
             rgba.T, names=("a", "b", "c", "d", "f")
         )
 

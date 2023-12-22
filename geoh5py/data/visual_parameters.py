@@ -52,11 +52,11 @@ class VisualParameters(TextData):
         return self._xml
 
     @property
-    def values(self) -> str | None:
+    def values(self) -> np.ndarray | str | None:
         if self._xml is not None:
             self._values = ET.tostring(self._xml, encoding="unicode")
 
-        elif (getattr(self, "_values", None) is None) and self.on_file:
+        elif self._values is None and self.on_file:
             values = self.workspace.fetch_values(self)
             if isinstance(values, (np.ndarray, str, type(None))):
                 self._values = values

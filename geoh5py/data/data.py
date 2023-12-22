@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 from abc import abstractmethod
+from typing import Any
 
 import numpy as np
 
@@ -55,7 +56,7 @@ class Data(Entity):
             )
 
         self.entity_type = data_type
-        self._values = None
+        self._values: Any | None = None
 
         super().__init__(**kwargs)
 

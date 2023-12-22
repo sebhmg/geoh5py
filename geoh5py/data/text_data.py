@@ -26,7 +26,6 @@ from .primitive_type_enum import PrimitiveTypeEnum
 
 
 class TextData(Data):
-    _values: np.ndarray | str | None
 
     @classmethod
     def primitive_type(cls) -> PrimitiveTypeEnum:

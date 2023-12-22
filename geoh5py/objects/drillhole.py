@@ -23,6 +23,7 @@ import re
 import uuid
 
 import numpy as np
+from typing import cast
 
 from ..data import Data, FloatData, NumericData
 from ..groups import PropertyGroup
@@ -105,6 +106,7 @@ class Drillhole(Points):
             if isinstance(value, str):
                 value = [float(n) for n in re.findall(r"-?\d+\.\d+", value)]
 
+            assert value is not None
             if len(value) != 3:
                 raise ValueError("Origin must be a list or numpy array of len (3,).")
 
@@ -254,7 +256,7 @@ class Drillhole(Points):
                 raise ValueError("'surveys' requires an ndarray of shape (*, 3)")
 
             self._surveys = np.asarray(
-                np.core.records.fromarrays(
+                np.rec.fromarrays(
                     value.T, names="Depth, Azimuth, Dip", formats="<f4, <f4, <f4"
                 )
             )
@@ -335,7 +337,7 @@ class Drillhole(Points):
     @depths.setter
     def depths(self, value: FloatData | np.ndarray | None):
         if isinstance(value, np.ndarray):
-            value = self.workspace.create_entity(
+            data = self.workspace.create_entity(
                 Data,
                 entity={
                     "parent": self,
@@ -346,8 +348,8 @@ class Drillhole(Points):
                 entity_type={"primitive_type": "FLOAT"},
             )
 
-        if isinstance(value, (FloatData, type(None))):
-            self._depths = value
+        if isinstance(data, (FloatData, type(None))):
+            self._depths = data
         else:
             raise ValueError(
                 f"Input '_depth' property must be of type{FloatData} or None"
@@ -572,12 +574,12 @@ class Drillhole(Points):
                 nan_values = np.ones(self.n_cells) * np.nan
 
             # Append values
-            values = merge_arrays(
+            values = cast(np.ndarray, merge_arrays(
                 nan_values,
                 values,
                 replace="B->A",
                 mapping=cell_map,
-            )
+            ))
             self.cells = np.r_[
                 self.cells,
                 self.add_vertices(self.desurvey(uni_new))[inv_map]
@@ -702,7 +704,8 @@ class Drillhole(Points):
                         isinstance(child, NumericData)
                         and getattr(child.association, "name", None) == "VERTEX"
                     ):
-                        child.values = child.format_values(child.values)[sort_ind]
+                        formatted_values = child.format_values(child.values)
+                        child.values = formatted_values[sort_ind] if formatted_values is not None else None
 
                 if self.vertices is not None:
                     self.vertices = self.vertices[sort_ind, :]

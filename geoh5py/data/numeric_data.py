@@ -21,6 +21,7 @@ from abc import ABC, abstractmethod
 from warnings import warn
 
 import numpy as np
+import numpy.typing as npt
 
 from .data import Data, PrimitiveTypeEnum
 
@@ -93,7 +94,7 @@ class NumericData(Data, ABC):
 
         return values
 
-    def format_values(self, values: np.ndarray | None) -> np.ndarray:
+    def format_values(self, values: np.ndarray | None) -> np.ndarray | None:
         """
         Check for possible mismatch between the length of values
         stored and the expected number of cells or vertices.

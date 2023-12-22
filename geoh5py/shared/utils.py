@@ -186,7 +186,7 @@ def merge_arrays(
     mapping=None,
     collocation_distance=1e-4,
     return_mapping=False,
-) -> np.ndarray | Tuple[np.ndarray, np.ndarray]:
+) -> np.ndarray | tuple[np.ndarray, np.ndarray]:
     """
     Given two numpy.arrays of different length, find the matching values and append both arrays.
 
@@ -199,7 +199,7 @@ def merge_arrays(
     :param: collocation_distance=1e-4, float
         Tolerance between matching values.
 
-    :return: numpy.array shape(O,)
+    :return: numpy.array shape(O,) or a tuple with the mapping array as second element if return_mapping=True.
         Unique values from head to tail without repeats, within collocation_distance.
     """
 

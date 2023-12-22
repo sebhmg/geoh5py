@@ -62,10 +62,10 @@ class Grid2D(GridObject):
         self._origin: np.ndarray = np.asarray(
             tuple(np.zeros(3)), dtype=[("x", float), ("y", float), ("z", float)]
         )
-        self._u_cell_size: float | None = None
-        self._v_cell_size: float | None = None
-        self._u_count: int | None = None
-        self._v_count: int | None = None
+        self._u_cell_size: float = 0.
+        self._v_cell_size: float = 0.
+        self._u_count: int = 0
+        self._v_count: int = 0
         self._rotation: float = 0.0
         self._vertical: bool = False
         self._dip: float = 0.0
@@ -80,7 +80,7 @@ class Grid2D(GridObject):
         :obj:`numpy.array` of :obj:`float`, shape(:obj:`~geoh5py.objects.grid2d.Grid2D.u_count`, ):
         Cell center local coordinate along the u-axis.
         """
-        if self.u_count is not None and self.u_cell_size is not None:
+        if self.u_count != 0 and self.u_cell_size != 0.:
             return (
                 np.cumsum(np.ones(self.u_count) * self.u_cell_size)
                 - self.u_cell_size / 2.0
@@ -93,7 +93,7 @@ class Grid2D(GridObject):
         :obj:`numpy.array` of :obj:`float` shape(:obj:`~geoh5py.objects.grid2d.Grid2D.u_count`, ):
         The cell center local coordinate along the v-axis.
         """
-        if self.v_count is not None and self.v_cell_size is not None:
+        if self.v_count != 0 and self.v_cell_size != 0.:
             return (
                 np.cumsum(np.ones(self.v_count) * self.v_cell_size)
                 - self.v_cell_size / 2.0
@@ -308,7 +308,7 @@ class Grid2D(GridObject):
         return None
 
     @property
-    def u_cell_size(self) -> float | None:
+    def u_cell_size(self) -> float:
         """
         :obj:`np.ndarray`: Cell size along the u-axis.
         """
@@ -328,7 +328,7 @@ class Grid2D(GridObject):
         self.workspace.update_attribute(self, "attributes")
 
     @property
-    def u_count(self) -> int | None:
+    def u_count(self) -> int:
         """
         :obj:`int`: Number of cells along u-axis
         """
@@ -344,7 +344,7 @@ class Grid2D(GridObject):
             self.workspace.update_attribute(self, "attributes")
 
     @property
-    def v_cell_size(self) -> float | None:
+    def v_cell_size(self) -> float:
         """
         :obj:`np.ndarray`: Cell size along the v-axis
         """
@@ -364,7 +364,7 @@ class Grid2D(GridObject):
         self.workspace.update_attribute(self, "attributes")
 
     @property
-    def v_count(self) -> int | None:
+    def v_count(self) -> int:
         """
         :obj:`int`: Number of cells along v-axis
         """
@@ -380,7 +380,7 @@ class Grid2D(GridObject):
             self.workspace.update_attribute(self, "attributes")
 
     @property
-    def vertical(self) -> bool | None:
+    def vertical(self) -> bool:
         """
         :obj:`bool`: Set the grid to be vertical.
         """

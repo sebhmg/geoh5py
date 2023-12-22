@@ -167,13 +167,13 @@ class Octree(GridObject):
         return cls.__TYPE_UID
 
     @property
-    def n_cells(self) -> int | None:
+    def n_cells(self) -> int:
         """
         :obj:`int`: Total number of cells in the mesh
         """
         if self.octree_cells is not None:
             return self.octree_cells.shape[0]
-        return None
+        return 0
 
     @property
     def octree_cells(self) -> np.ndarray | None:
@@ -220,7 +220,7 @@ class Octree(GridObject):
                 ), "'octree_cells' requires an ndarray of shape (*, 4)"
                 self._centroids = None
                 self._octree_cells = np.asarray(
-                    np.core.records.fromarrays(
+                    np.rec.fromarrays(
                         value.T, names="I, J, K, NCells", formats="<i4, <i4, <i4, <i4"
                     )
                 )

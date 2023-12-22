@@ -189,11 +189,11 @@ class Group(Entity):
                 extents.append(child.extent)
 
         if len(extents) > 0:
-            extents = np.vstack(extents)
+            stacked_extents = np.vstack(extents)
             return np.vstack(
                 [
-                    np.min(extents, axis=0),
-                    np.max(extents, axis=0),
+                    np.min(stacked_extents, axis=0),
+                    np.max(stacked_extents, axis=0),
                 ]
             )
 

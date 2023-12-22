@@ -63,7 +63,7 @@ class Points(ObjectBase):
         """
         Sub-class extension of :func:`~geoh5py.shared.entity.Entity.mask_by_extent`.
         """
-        if self.extent is None or not box_intersect(self.extent, extent):
+        if self.extent is None or not box_intersect(self.extent, extent) or self.vertices is None:
             return None
 
         return mask_by_extent(self.vertices, extent, inverse=inverse)
@@ -95,7 +95,7 @@ class Points(ObjectBase):
             )
 
         self._vertices = np.asarray(
-            np.core.records.fromarrays(
+            np.rec.fromarrays(
                 xyz.T.tolist(),
                 dtype=[("x", "<f8"), ("y", "<f8"), ("z", "<f8")],
             )
@@ -129,6 +129,7 @@ class Points(ObjectBase):
         ):
             raise ValueError("Found indices larger than the number of vertices.")
 
+        assert self.vertices is not None
         vertices = np.delete(self.vertices, indices, axis=0)
         self._vertices = None
         self.vertices = vertices

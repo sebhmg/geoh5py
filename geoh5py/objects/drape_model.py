@@ -131,7 +131,7 @@ class DrapeModel(GridObject):
             raise ValueError(msg)
 
         self._layers = np.asarray(
-            np.core.records.fromarrays(
+            np.rec.fromarrays(
                 xyz.T.tolist(),
                 dtype=[("I", "<i4"), ("K", "<i4"), ("Bottom elevation", "<f8")],
             )
@@ -177,7 +177,7 @@ class DrapeModel(GridObject):
             xyz.shape[1] == 5
         ), f"Array of prisms must be of shape (*, 5). Array of shape {xyz.shape} provided."
         self._prisms = np.asarray(
-            np.core.records.fromarrays(
+            np.rec.fromarrays(
                 xyz.T.tolist(),
                 dtype={
                     "names": [
