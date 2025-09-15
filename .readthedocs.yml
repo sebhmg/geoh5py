@@ -22,9 +22,9 @@ build:
         git config filter.lfs.clean "$git_lfs_path/git-lfs clean -- %f"
       - |
         set -e
-        ./git-lfs install
-        ./git-lfs fetch
-        ./git-lfs checkout
+        git lfs install
+        git lfs fetch
+        git lfs checkout
 
     create_environment:
       - asdf plugin add pixi
